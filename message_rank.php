@@ -9,7 +9,6 @@
 	
 	<script>
    
-   
 	//初始化
 	window.fbAsyncInit = function() {
 	
@@ -123,19 +122,18 @@
 		function get_name(id){
 			if(id==my_id) return;
 			$.ajax({
-			  url: 'http://graph.facebook.com/'+id+"?fields=name",
-			  dataType: 'json',
-			  async: false,
-			  success: function(data) {
-				get_name_count++;
-				id_to_name[id]=data.name;
-				m_log(id+"->"+data.name);
-				if(get_name_count>=receiver_count){
-					make_result();
+				url: 'http://graph.facebook.com/'+id+"?fields=name",
+				dataType: 'json',
+				async: false,
+				success: function(data) {
+					get_name_count++;
+					id_to_name[id]=data.name;
+					m_log(id+"->"+data.name);
+					if(get_name_count>=receiver_count){
+						make_result();
+					}
+					return true;
 				}
-				return true;
-				//return data.name;
-			  }
 			});
 		}
 		
@@ -194,7 +192,7 @@
 			appId      : '137446166353522',
 			xfbml      : true,
 			version    : 'v2.0'
-        });
+		});
 		
 		//登入 要求權限
 		FB.login(function(){
@@ -206,9 +204,9 @@
 			get_message("/me/inbox");
 			
 		}, {scope: 'read_mailbox'});
-      };
+	};
 
-	  //新增fb sdk
+	//新增fb sdk
       (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];
          if (d.getElementById(id)) {return;}
